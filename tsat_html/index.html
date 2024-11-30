@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ TCAS 68</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .logo {
+            width: 200px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 400px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid #0078d7;
+            border-radius: 5px;
+            background-color: #e6f7ff;
+            text-align: left;
+        }
+
+        .info strong {
+            color: #0078d7;
+        }
+
+        img.card-image {
+            width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        a {
+            color: #0078d7;
+            font-size: 14px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://www.mytcas.com/img/logo68.svg" alt="TCAS 68 Logo" class="logo">
+    <div class="container">
+        <h1>เข้าสู่ระบบ</h1>
+        <p class="info">
+            เข้าระบบลงทะเบียนด้วย <strong>เลขประจำตัวประชาชน 13 หลัก</strong><br>
+            หากไม่มี ให้ใช้ <strong>G Number</strong> หรือ <strong>Passport Number</strong>
+        </p>
+        <img src="https://t1.blockdit.com/photos/2019/08/5d661e8412da810cc92e0ba0_800x0xcover_sdEx641m.jpg" alt="บัตรประชาชน" class="card-image">
+        <form id="loginForm">
+            <label for="id_number">เลขประจำตัว *</label> <br>
+            <input type="text" id="id_number" name="id_number" placeholder="กรอกเลขประจำตัว" required>
+            <span class="error" id="errorMsg">กรุณากรอกเลขประจำตัวที่ถูกต้อง</span>
+            <button type="button" onclick="checkLogin()">เข้าสู่ระบบ</button><br>
+        </form>
+        <a href="forgot.html">ลืมรหัสผ่าน?</a>
+    </div>
+
+    <script>
+        function checkLogin() {
+            const userId = document.getElementById("id_number").value.trim();
+            const errorMsg = document.getElementById("errorMsg");
+            const correctIds = ["11092549", "12345678", "87654321"]; // รหัสที่ถูกต้อง
+
+            if (!userId) {
+                errorMsg.style.display = "block";
+                errorMsg.innerText = "กรุณากรอกเลขประจำตัว";
+                return;
+            }
+
+            if (correctIds.includes(userId)) {
+                errorMsg.style.display = "none";
+                window.location.href = "success.html";
+            } else {
+                errorMsg.style.display = "block";
+                errorMsg.innerText = "เลขประจำตัวไม่ถูกต้อง! กรุณาลองอีกครั้ง";
+            }
+        }
+    </script>
+</body>
+</html>
+
