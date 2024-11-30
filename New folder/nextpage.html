@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลการสมัคร</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #0056a8;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .sub-header {
+            background-color: #ffa500;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .confirmation-section {
+            border: 2px solid #28a745; /* กรอบเขียว */
+            padding: 20px 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            width: 90%; /* กรอบสีเขียวยาวชิด */
+            min-height: 300px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .confirmation-section h3 {
+            color: #28a745;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-time {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .university-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .university-info img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .university-info div {
+            text-align: center;
+        }
+
+        .university-info h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .university-info p {
+            font-size: 16px;
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .round {
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .round-2 {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .round-3 {
+            background-color: #29b6f6;
+            color: white;
+        }
+
+        .round-4 {
+            background-color: #0078d7;
+            color: white;
+        }
+
+        .toggle-button {
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-button:hover {
+            color: #0056a8;
+        }
+
+        .round-details {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none; /* ซ่อนข้อความเริ่มต้น */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">ข้อมูลการสมัคร</div>
+    <div class="sub-header">Portfolio</div>
+    <div class="container">
+        <!-- ส่วนข้อมูลการยืนยันสิทธิ์ -->
+        <div class="confirmation-section" id="confirmationSection">
+            <h3>ยืนยันสิทธิ์เรียบร้อยแล้ว</h3>
+            <p id="confirmationTime">-</p>
+            <div class="university-info">
+                <img id="universityLogo" src="" alt="โลโก้มหาวิทยาลัย">
+                <div>
+                    <p id="universityName"><strong>-</strong></p>
+                    <p id="faculty">-</p>
+                    <p id="program">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- รอบการสมัครอื่นๆ -->
+        <div class="round round-2" onclick="toggleRoundDetails(this)">
+            <span>รอบ 2: Quota</span>
+            <span class="toggle-button">▼</span>
+        </div>
+        <div class="round-details">อะไรยังไม่เปิดเนาะอย่ารีบ</div>
+
+        <div class="round round-3" onclick="toggleRoundDetails(this)">
+            <span>รอบ 3: Admission</span>
+            <span class="toggle-button">▼</span>
+        </div>
+        <div class="round-details">รีบไรเอ่ยอีกตั้งหลายเดือนไปสอบ tgat ก่อนเถอะ</div>
+
+        <div class="round round-4" onclick="toggleRoundDetails(this)">
+            <span>รอบ 4: Direct Admission</span>
+            <span class="toggle-button">▼</span>
+        </div>
+        <div class="round-details">ว้าย!!!!!!ไม่มีที่เรียนหรอ</div>
+    </div>
+
+    <script>
+        // ดึงข้อมูลจาก Local Storage
+        const universityData = JSON.parse(localStorage.getItem("selectedUniversity"));
+        const confirmationTime = localStorage.getItem("confirmationTime");
+
+        // ตรวจสอบข้อมูลและแสดงผล
+        if (universityData && confirmationTime) {
+            const universityLogo = document.getElementById("universityLogo");
+            universityLogo.src = universityData.logo || "default-logo.png";
+            universityLogo.alt = universityData.name || "ไม่มีโลโก้";
+
+            document.getElementById("universityName").innerHTML = `<strong>${universityData.name || "ไม่ระบุชื่อมหาวิทยาลัย"}</strong>`;
+            document.getElementById("faculty").innerText = `คณะ: ${universityData.faculty || "ไม่ระบุคณะ"}`;
+            document.getElementById("program").innerText = `สาขา: ${universityData.program || "ไม่ระบุสาขา"}`;
+            document.getElementById("confirmationTime").innerText = `ยืนยันสิทธิ์เมื่อ: ${confirmationTime || "ไม่ระบุเวลา"}`;
+        } else {
+            document.getElementById("confirmationSection").innerHTML = "<p style='color: red;'>ไม่มีข้อมูลการยืนยันสิทธิ์</p>";
+        }
+
+        // ฟังก์ชันแสดง/ซ่อนข้อความ
+        function toggleRoundDetails(element) {
+            const details = element.nextElementSibling;
+
+            if (details.style.display === "block") {
+                details.style.display = "none"; // ซ่อนข้อความ
+            } else {
+                details.style.display = "block"; // แสดงข้อความ
+            }
+        }
+    </script>
+</body>
+</html>
