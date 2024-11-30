@@ -1,0 +1,10 @@
+{
+  "public": "./public",
+  "redirects": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/forgot", "destination": "/forgot.html" },
+    { "source": "/nextpage", "destination": "/nextpage.html" },
+    { "source": "/reject", "destination": "/reject.html" },
+    { "source": "/success", "destination": "/success.html" }
+  ]
+}
